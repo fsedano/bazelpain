@@ -1,0 +1,36 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix fsedano.net/test
+gazelle(name = "gazelle")
+
+gazelle(
+    name = "gazelle-update-repos",
+    args = [
+        "-from_file=go.mod",
+        "-to_macro=deps.bzl%go_dependencies",
+        "-prune",
+        "--build_naming_convention=go_default_library",
+        "--build_file_proto_mode=disable_global",
+    ],
+    command = "update-repos",
+)
+
+go_library(
+    name = "test_lib",
+    srcs = ["main.go"],
+    importpath = "fsedano.net/test",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_argoproj_argo_workflows_v3//pkg/apis/workflow/v1alpha1",
+        "@io_k8s_api//core/v1:core",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+        "@io_k8s_client_go//rest",
+    ],
+)
+
+go_binary(
+    name = "test",
+    embed = [":test_lib"],
+    visibility = ["//visibility:public"],
+)
