@@ -30,6 +30,7 @@ go_library(
     importpath = "fsedano.net/test",
     visibility = ["//visibility:private"],
     deps = [
+        "//argolib",
         "//mylib2",
         "@com_github_gin_gonic_gin//:gin",
     ],

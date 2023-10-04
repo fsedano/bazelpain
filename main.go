@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	//"fsedano.net/test/argolib"
+	"fsedano.net/test/argolib"
 	//"fsedano.net/test/mylib"
 	"fsedano.net/test/mylib2"
 
@@ -73,7 +73,7 @@ func setupRouter() *gin.Engine {
 
 func main() {
 	r := setupRouter()
-	//argolib.Argo()
+	argolib.Argo()
 	//mylib.Receive(context.Background())
 	mylib2.Demo()
 	// Listen and Server in 0.0.0.0:8080
