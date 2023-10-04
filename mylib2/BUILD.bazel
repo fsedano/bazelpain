@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "mylib2",
+    srcs = ["mylib2.go"],
+    importpath = "fsedano.net/test/mylib2",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_grpc_ecosystem_grpc_gateway//runtime"],
+)
+
+alias(
+    name = "go_default_library",
+    actual = ":mylib2",
+    visibility = ["//visibility:public"],
+)
