@@ -1,11 +1,10 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
-	"fsedano.net/test/argolib"
 	//"fsedano.net/test/mylib"
-	"fsedano.net/test/mylib2"
 
 	"github.com/gin-gonic/gin"
 )
@@ -73,9 +72,23 @@ func setupRouter() *gin.Engine {
 
 func main() {
 	r := setupRouter()
-	argolib.Argo()
+	x(r)
+
+	//argolib.Argo()
 	//mylib.Receive(context.Background())
-	mylib2.Demo()
+	//mylib2.Demo()
 	// Listen and Server in 0.0.0.0:8080
 	r.Run(":8080")
+}
+
+func x(a interface{}) int {
+	log.Printf("A IS %s", a)
+	x := 1
+	b := 2
+	if x == 1 {
+		c := 3
+		log.Printf("B es %d", c)
+	}
+	log.Printf("B1 es %d", b)
+	return 4
 }

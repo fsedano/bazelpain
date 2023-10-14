@@ -1,4 +1,4 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "nogo")
 load("@bazel_gazelle//:def.bzl", "gazelle")
 
 # gazelle:prefix fsedano.net/test
@@ -25,7 +25,7 @@ gazelle(
 )
 
 go_library(
-    name = "test_lib",
+    name = "gin_lib",
     srcs = ["main.go"],
     importpath = "fsedano.net/test",
     visibility = ["//visibility:private"],
@@ -37,7 +37,31 @@ go_library(
 )
 
 go_binary(
-    name = "test",
-    embed = [":test_lib"],
+    name = "gin",
+    embed = [":gin_lib"],
     visibility = ["//visibility:public"],
+)
+
+nogo(
+    name = "my_nogo",
+    config = ":config.json",
+    visibility = ["//visibility:public"],  # must have public visibility
+    vet = True,
+    deps = [
+        # analyzer from the local repository
+        #":importunsafe",
+        # analyzer from a remote repository
+        #"@org_golang_x_tools//go/analysis/passes/printf:go_default_library",
+        "@org_golang_x_tools//go/analysis/passes/ifaceassert",
+        "@org_golang_x_tools//go/analysis/passes/unusedresult",
+        "@org_golang_x_tools//go/analysis/passes/shadow:shadow"
+    ],
+)
+
+go_library(
+    name = "importunsafe",
+    srcs = ["importunsafe.go"],
+    importpath = "importunsafe",
+    visibility = ["//visibility:public"],
+    deps = ["@org_golang_x_tools//go/analysis:go_default_library"],
 )

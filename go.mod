@@ -7,6 +7,7 @@ require (
 	github.com/argoproj/pkg v0.13.6
 	github.com/gin-gonic/gin v1.9.1
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0
+	golang.org/x/tools v0.8.0
 	k8s.io/api v0.28.2
 	k8s.io/apimachinery v0.28.2
 	k8s.io/client-go v0.28.2

@@ -33,7 +33,9 @@ load("//:deps.bzl", "go_dependencies")
 go_dependencies()
 
 go_rules_dependencies()
+go_register_toolchains(version = "1.20.5", nogo = "@//:my_nogo") # my_nogo is in the top-level BUILD file of this workspace
+#go_register_toolchains(version = "1.20.5", nogo = "@io_bazel_rules_go//:tools_nogo") # my_nogo is in the top-level BUILD file of this workspace
 
-go_register_toolchains(version = "1.20.5")
+#go_register_toolchains(version = "1.20.5")
 
 gazelle_dependencies()

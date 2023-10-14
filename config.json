@@ -1,0 +1,36 @@
+{
+    "_base": {
+        "description": "Base config that all subsequent analyzers, even unspecified will inherit.",
+        "exclude_files": {
+            "third_party/": "exclude all third_party code for all analyzers",
+            "external/.*": "All ext"
+        }
+    },
+    "unreachable": {
+        "exclude_files": {
+            "external/com_github_leodido_go_urn/machine.go": "pepe"
+        }
+    },
+    "shadow1": {
+        "exclude_files": {
+            "external/.*":"a"
+        }
+    },
+    "importunsafe": {
+        "exclude_files": {
+            "src/foo\\.go": "manually verified that behavior is working-as-intended",
+            "src/bar\\.go": "see issue #1337"
+        }
+    },
+    "unsafedom": {
+        "only_files": {
+            "src/js/.*": ""
+        },
+        "exclude_files": {
+            "src/(third_party|vendor)/.*": "enforce DOM safety requirements only on first-party code"
+        },
+        "analyzer_flags": {
+            "block-unescaped-html": "false"
+        }
+    }
+}
